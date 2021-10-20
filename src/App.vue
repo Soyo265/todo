@@ -31,7 +31,7 @@ export default {
   },
   methods: {
     deleteTodo(idx) {
-      this.todos.splice(idx, 1);
+      this.todos = [...this.todos.filter((val, currentIdx) => idx !== currentIdx)];
     },
     addTodo(todo){
       this.todos.push(todo);
