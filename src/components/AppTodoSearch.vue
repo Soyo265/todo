@@ -13,10 +13,8 @@
 
   export default {
     name: "AppTodoSearch",
-    data() {
-      return {
-        input: ''
-      }
+    props: {
+      input: String
     },
     watch: {
       input() {

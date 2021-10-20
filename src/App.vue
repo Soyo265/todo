@@ -1,11 +1,12 @@
 <template>
   <div id="app">
     <app-todo-add
-            @addTodo="todos.push($event)"
+            @addTodo="addTodo"
     ></app-todo-add>
     <br>
     <app-todo-search
             @changeSearchInput="search = $event"
+            :input="search"
     ></app-todo-search>
     <app-todo-list
             :todos="todos"
@@ -31,6 +32,10 @@ export default {
   methods: {
     deleteTodo(idx) {
       this.todos.splice(idx, 1);
+    },
+    addTodo(todo){
+      this.todos.push(todo);
+      this.search = '';
     }
   },
   components: {
