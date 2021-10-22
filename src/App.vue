@@ -4,16 +4,16 @@
 
     <app-main>
       <v-row class="d-flex align-end justify-center">
-        <v-col lg="4" md="5" sm="12">
+        <v-col lg="4" md="5" sm="12" cols="12">
           <app-todo-add></app-todo-add>
         </v-col>
         <br>
-        <v-col lg="4" md="5" sm="12">
+        <v-col lg="4" md="5" sm="12" cols="12">
           <app-todo-search></app-todo-search>
         </v-col>
       </v-row>
       <v-row class="d-flex align-end justify-center">
-        <v-col lg="8" md="10" sm="12">
+        <v-col lg="8" md="10" sm="12" cols="12">
           <app-todo-list></app-todo-list>
         </v-col>
       </v-row>
