@@ -1,16 +1,28 @@
 <template>
   <div>
-    <base-input
+    <app-input
             v-model="todo"
             @keydown.enter="add"
-            label="Добавить задачу: " id="add"
-    ></base-input>
-    <button @click="add">Добавить</button>
+            label="Добавить задачу: "
+    >
+      <v-btn
+              @click="add"
+              text
+              icon
+              color="teal"
+      >
+        <v-icon>mdi-plus</v-icon>
+      </v-btn>
+    </app-input>
+
   </div>
 </template>
 
 <script>
-  import BaseInput from "./BaseInput";
+  import AppInput from "./AppInput";
+  import { createNamespacedHelpers } from 'vuex';
+
+  const { mapState, mapMutations } = createNamespacedHelpers('todo');
 
   export default {
     name: "AppTodoAdd",
@@ -21,12 +33,17 @@
     },
     methods: {
       add() {
-        this.$emit('addTodo', this.todo);
+        this.addTodo(this.todo);
         this.todo = '';
-      }
+        this.updateSearch('');
+      },
+      ...mapMutations(['addTodo', 'updateSearch'])
+    },
+    computed: {
+      ...mapState(['todos'])
     },
     components: {
-      BaseInput
+      AppInput
     }
   }
 </script>

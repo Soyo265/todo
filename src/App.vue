@@ -1,49 +1,51 @@
 <template>
-  <div id="app">
-    <app-todo-add
-            @addTodo="addTodo"
-    ></app-todo-add>
-    <br>
-    <app-todo-search
-            @changeSearchInput="search = $event"
-            :input="search"
-    ></app-todo-search>
-    <app-todo-list
-            :todos="todos"
-            :search="search"
-            @delete="deleteTodo"
-    ></app-todo-list>
-  </div>
+  <v-app>
+    <app-header></app-header>
+
+    <app-main>
+      <v-row class="d-flex align-end justify-center">
+        <v-col lg="4" md="5" sm="12">
+          <app-todo-add></app-todo-add>
+        </v-col>
+        <br>
+        <v-col lg="4" md="5" sm="12">
+          <app-todo-search></app-todo-search>
+        </v-col>
+      </v-row>
+      <v-row class="d-flex align-end justify-center">
+        <v-col lg="8" md="10" sm="12">
+          <app-todo-list></app-todo-list>
+        </v-col>
+      </v-row>
+    </app-main>
+
+    <app-footer></app-footer>
+  </v-app>
 </template>
 
 <script>
-import AppTodoAdd from "./components/AppTodoAdd";
-import AppTodoSearch from "./components/AppTodoSearch";
-import AppTodoList from "./components/AppTodoList";
+  import AppTodoAdd from "./components/AppTodoAdd";
+  import AppTodoSearch from "./components/AppTodoSearch";
+  import AppTodoList from "./components/AppTodoList";
+  import AppHeader from "./components/AppHeader";
+  import AppFooter from "./components/AppFooter";
+  import AppMain from "./components/AppMain";
+  import { createNamespacedHelpers } from 'vuex';
 
-export default {
-  name: 'App',
-  data() {
-    return {
-      todos: [],
-      search: ''
-    }
-  },
-  methods: {
-    deleteTodo(idx) {
-      this.todos = [...this.todos.filter((val, currentIdx) => idx !== currentIdx)];
+  const { mapState } = createNamespacedHelpers('todo');
+
+  export default {
+    name: 'App',
+    computed: {
+      ...mapState(['todos'])
     },
-    addTodo(todo){
-      this.todos.push(todo);
-      this.search = '';
+    components: {
+      AppTodoAdd,
+      AppTodoSearch,
+      AppTodoList,
+      AppHeader,
+      AppFooter,
+      AppMain
     }
-  },
-  components: {
-    AppTodoAdd,
-    AppTodoSearch,
-    AppTodoList
   }
-}
 </script>
-
-<style></style>

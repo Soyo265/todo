@@ -1,14 +1,17 @@
 <template>
   <div>
-    <label
-      :for="id"
-    >{{label}}</label>
-    <input
-      :id="id"
-      v-on="listeners"
-      :value="value"
-      v-bind="$attrs"
-      type="text">
+    <v-text-field
+          v-on="listeners"
+          :value="value"
+          :label="label"
+          class="d.inline"
+          type="text"
+          color="teal"
+    >
+      <template v-slot:append>
+        <slot></slot>
+      </template>
+    </v-text-field>
   </div>
 </template>
 
@@ -24,8 +27,8 @@
       listeners() {
         const vm = this;
         return Object.assign({}, this.$listeners, {
-          input(event) {
-            vm.$emit('input', event.target.value);
+          input(value) {
+            vm.$emit('input', value);
           }
         })
       }

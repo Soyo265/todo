@@ -1,28 +1,29 @@
 <template>
   <div>
-    <base-input
-        v-model="input"
+    <app-input
+        :value="search"
+        @input="updateSearch($event)"
         label="Поиск по задачам: "
-        id="search"
-    ></base-input>
+    ></app-input>
   </div>
 </template>
 
 <script>
-  import BaseInput from "./BaseInput";
+  import AppInput from "./AppInput";
+  import { createNamespacedHelpers } from 'vuex';
+
+  const { mapMutations, mapState } = createNamespacedHelpers('todo');
 
   export default {
     name: "AppTodoSearch",
-    props: {
-      input: String
+    methods:{
+      ...mapMutations(['updateSearch'])
     },
-    watch: {
-      input() {
-        this.$emit('changeSearchInput', this.input);
-      }
+    computed: {
+      ...mapState(['search'])
     },
     components: {
-      BaseInput
+      AppInput
     }
   }
 </script>
