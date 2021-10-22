@@ -7,7 +7,7 @@ export default {
   getters: {
     filteredTodos(state) {
       if (!state.search) return state.todos;
-      return state.todos.filter(todo => todo.toLowerCase().includes(state.search));
+      return state.todos.filter(todo => todo.toLowerCase().includes(state.search.toLowerCase()));
     }
   },
   mutations: {
